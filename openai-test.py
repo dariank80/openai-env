@@ -1,17 +1,18 @@
 from flask import Flask, request, render_template
-import openai
+from openai import OpenAI
+
+client = OpenAI()
 
 app = Flask(__name__)
 
 def translate_nodejs_to_python(nodejs_code):
     try:
-        response = openai.completions.create(
-            model="text-davinci-003",
-            prompt=f"Convert the following Node.js code to Python:\n\n{nodejs_code}",
-            temperature=0,
-            max_tokens=300
-        )
-        return response.choices[0].text.strip()
+        response = client.chat.completions.create(model="gpt-4-1106-preview",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant that identifies the language of the given code."},
+            {"role": "user", "content": f"Convert the following code to Python:\n\n{nodejs_code}"}
+        ])
+        return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"An error occurred: {e}")
         return None

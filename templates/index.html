@@ -2,17 +2,18 @@
 <html>
 <head>
     <title>Node.js to Python Converter</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Node.js to Python Code Converter</h1>
     <form method="post">
-        <textarea name="nodejs_code" rows="30" cols="100" placeholder="Enter your Node.js code here..."></textarea><br>
+        <textarea name="nodejs_code" rows="20" cols="80" placeholder="Enter your Node.js code here..."></textarea><br>
         <input type="submit" value="Convert">
     </form>
 
     {% if python_code %}
         <h2>Converted Python Code:</h2>
-        <textarea rows="30" cols="100">{{ python_code }}</textarea>
+        <textarea rows="20" cols="80">{{ python_code }}</textarea>
     {% endif %}
 </body>
 </html>
